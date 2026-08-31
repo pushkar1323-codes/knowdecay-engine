@@ -1,0 +1,53 @@
+# Version control
+.git
+.github
+.gitignore
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Testing
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Environment files (secrets)
+.env
+*.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Documentation & simulation (not needed in production image)
+docs/
+simulation/
+.agents/
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose*.yml
+*.log
+
+# Misc
+README.md
+LICENSE
+Makefile

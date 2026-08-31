@@ -1,0 +1,187 @@
+# ── KnowDecay Engine — Continuous Integration ─────────────────────────────────
+#
+# Triggered on push/PR to main and develop branches.
+# Pipeline: lint → test (with PostgreSQL) → docker build & verify
+# ──────────────────────────────────────────────────────────────────────────────
+
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+env:
+  PYTHON_VERSION: "3.11"
+
+jobs:
+
+  # ── Lint & Format ──────────────────────────────────────────────────────────
+  lint:
+    name: Lint & Format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install linting tools
+        run: pip install ruff
+
+      - name: Check formatting
+        run: ruff format --check .
+
+      - name: Check linting
+        run: ruff check .
+
+  # ── Test Suite ─────────────────────────────────────────────────────────────
+  test:
+    name: Test Suite
+    needs: lint
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: knowdecay_test
+          POSTGRES_PASSWORD: knowdecay_test
+          POSTGRES_DB: knowdecay_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U knowdecay_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: postgresql://knowdecay_test:knowdecay_test@localhost:5432/knowdecay_test
+      TEST_DATABASE_URL: postgresql://knowdecay_test:knowdecay_test@localhost:5432/knowdecay_test
+      JWT_SECRET_KEY: ci-test-secret-key-minimum-32-characters-long-for-testing
+      APP_ENV: testing
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validate environment configuration
+        run: |
+          python -c "
+          from app.config import get_settings
+          s = get_settings()
+          assert s.app_env == 'testing', f'Expected testing, got {s.app_env}'
+          assert len(s.jwt_secret_key) >= 32, 'JWT secret too short'
+          print(f'✓ Config valid: env={s.app_env}, db={s.database_url[:30]}...')
+          "
+
+      - name: Validate Alembic migrations
+        run: alembic upgrade head
+
+      - name: Run complete test suite
+        run: pytest tests/ -v --tb=short
+
+      - name: Verify OpenAPI schema generation
+        run: |
+          python -c "
+          from app.main import app
+          schema = app.openapi()
+          assert 'paths' in schema, 'OpenAPI schema missing paths'
+          assert '/health' in schema['paths'], 'Health endpoint missing'
+          endpoint_count = len(schema['paths'])
+          print(f'✓ OpenAPI schema valid: {endpoint_count} endpoint paths')
+          "
+
+  # ── Docker Build & Verify ──────────────────────────────────────────────────
+  docker:
+    name: Docker Build & Verify
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build production Docker image
+        run: docker build -t knowdecay-engine:ci .
+
+      - name: Verify image size
+        run: |
+          SIZE=$(docker image inspect knowdecay-engine:ci --format='{{.Size}}')
+          SIZE_MB=$((SIZE / 1024 / 1024))
+          echo "Image size: ${SIZE_MB}MB"
+          if [ $SIZE_MB -gt 500 ]; then
+            echo "⚠ Image larger than 500MB — consider optimizing"
+          fi
+
+      - name: Create test environment
+        run: |
+          cat > .env << 'EOF'
+          APP_ENV=testing
+          APP_NAME=KnowDecay Engine
+          APP_VERSION=0.1.0
+          DATABASE_URL=postgresql://knowdecay:knowdecay@db:5432/knowdecay
+          JWT_SECRET_KEY=ci-test-secret-key-minimum-32-characters-long-for-testing
+          LOG_LEVEL=INFO
+          LOG_FORMAT=text
+          EOF
+
+      - name: Start database
+        run: |
+          docker compose up -d db
+          sleep 10
+
+      - name: Run database migrations
+        run: docker compose --profile tools run --rm migrate
+
+      - name: Start API (development mode)
+        run: |
+          docker compose up -d api
+          sleep 15
+
+      - name: Verify health endpoints
+        run: |
+          echo "Checking /health..."
+          curl -sf http://localhost:8000/health | python -m json.tool
+
+          echo "Checking /health/live..."
+          curl -sf http://localhost:8000/health/live | python -m json.tool
+
+          echo "Checking /health/ready..."
+          curl -sf http://localhost:8000/health/ready | python -m json.tool
+
+          echo "Checking /docs (Swagger UI)..."
+          curl -sf -o /dev/null -w "%{http_code}" http://localhost:8000/docs
+
+          echo ""
+          echo "✓ All health and documentation endpoints verified"
+
+      - name: Verify PostgreSQL connectivity
+        run: |
+          HEALTH=$(curl -sf http://localhost:8000/health)
+          DB_STATUS=$(echo $HEALTH | python -c "import sys,json; print(json.load(sys.stdin)['database'])")
+          if [ "$DB_STATUS" != "connected" ]; then
+            echo "✗ Database not connected: $DB_STATUS"
+            exit 1
+          fi
+          echo "✓ PostgreSQL connectivity verified"
+
+      - name: Tear down
+        if: always()
+        run: docker compose down -v

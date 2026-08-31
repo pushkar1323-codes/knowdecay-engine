@@ -1,0 +1,35 @@
+# ── Web Framework ─────────────────────────────────────────────────────────────
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+
+# ── Production Server ─────────────────────────────────────────────────────────
+gunicorn>=22.0.0                   # Process manager with Uvicorn ASGI workers
+
+# ── Database ───────────────────────────────────────────────────────────────────
+sqlalchemy>=2.0.30
+alembic>=1.13.1
+psycopg2-binary>=2.9.9            # PostgreSQL driver (sync)
+
+# ── Validation & Settings ──────────────────────────────────────────────────────
+pydantic>=2.7.0
+pydantic-settings>=2.2.1
+
+# ── Analytics & Numerics ──────────────────────────────────────────────────────
+numpy>=1.26.4
+pandas>=2.2.2
+
+# ── Utilities ─────────────────────────────────────────────────────────────────
+python-dotenv>=1.0.1
+
+# ── Authentication & Security ─────────────────────────────────────────────────
+python-jose[cryptography]>=3.3.0   # JWT encoding/decoding (HS256)
+bcrypt>=4.0.0                      # Password hashing (direct bcrypt)
+python-multipart>=0.0.9            # Form data parsing for OAuth2
+
+# ── Code Quality ──────────────────────────────────────────────────────────────
+ruff>=0.4.0                        # Linting and formatting
+
+# ── Testing ───────────────────────────────────────────────────────────────────
+pytest>=8.2.0
+pytest-asyncio>=0.23.6
+httpx>=0.27.0                      # Test client for FastAPI

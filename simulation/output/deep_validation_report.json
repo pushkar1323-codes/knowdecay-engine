@@ -1,0 +1,315 @@
+[
+  {
+    "test": "adaptive_decay_consistency",
+    "passed": true,
+    "violations": {
+      "spontaneous_increase": 0,
+      "decay_rate_negative": 0,
+      "adaptive_stability_negative": 0,
+      "total_idle_transitions": 3590
+    },
+    "decay_rate": {
+      "min": 0.068147,
+      "max": 1.0,
+      "mean": 0.250166,
+      "stdev": 0.303944
+    },
+    "adaptive_stability": {
+      "min": 0.1,
+      "max": 1.5173,
+      "mean": 0.6787
+    }
+  },
+  {
+    "test": "retention_evolution",
+    "passed": true,
+    "per_archetype": {
+      "diligent": {
+        "topics_total": 16,
+        "topics_with_change": 16,
+        "change_rate": 1.0,
+        "retention_range": 0.4715,
+        "initial_mean": 0.0794,
+        "final_mean": 0.0686,
+        "trajectory_variance": 0.000626,
+        "trajectory_sample": [
+          0.0794,
+          0.0794,
+          0.0794,
+          0.0853,
+          0.0853,
+          0.0853,
+          0.0853,
+          0.0917,
+          0.0963,
+          0.0951
+        ]
+      },
+      "cramming": {
+        "topics_total": 16,
+        "topics_with_change": 10,
+        "change_rate": 0.625,
+        "retention_range": 0.12,
+        "initial_mean": 0.05,
+        "final_mean": 0.0698,
+        "trajectory_variance": 5.1e-05,
+        "trajectory_sample": [
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05
+        ]
+      },
+      "struggling": {
+        "topics_total": 16,
+        "topics_with_change": 10,
+        "change_rate": 0.625,
+        "retention_range": 0.0955,
+        "initial_mean": 0.05,
+        "final_mean": 0.0557,
+        "trajectory_variance": 2.4e-05,
+        "trajectory_sample": [
+          0.05,
+          0.05,
+          0.053,
+          0.053,
+          0.053,
+          0.0549,
+          0.0549,
+          0.058,
+          0.058,
+          0.058
+        ]
+      },
+      "coasting": {
+        "topics_total": 16,
+        "topics_with_change": 16,
+        "change_rate": 1.0,
+        "retention_range": 0.1741,
+        "initial_mean": 0.0612,
+        "final_mean": 0.0567,
+        "trajectory_variance": 0.000138,
+        "trajectory_sample": [
+          0.0612,
+          0.0684,
+          0.0684,
+          0.0734,
+          0.0754,
+          0.0814,
+          0.0814,
+          0.0814,
+          0.0814,
+          0.0814
+        ]
+      },
+      "absent": {
+        "topics_total": 16,
+        "topics_with_change": 1,
+        "change_rate": 0.062,
+        "retention_range": 0.05,
+        "initial_mean": 0.05,
+        "final_mean": 0.0531,
+        "trajectory_variance": 1e-06,
+        "trajectory_sample": [
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05
+        ]
+      }
+    },
+    "archetypes_with_evolution": 5,
+    "overall_change_rate": 0.662
+  },
+  {
+    "test": "reinforcement_behavior",
+    "passed": true,
+    "event_retention_effects": {
+      "quiz_submitted": {
+        "retention_up": 16,
+        "retention_down": 0,
+        "no_change": 5
+      },
+      "revision_completed": {
+        "retention_up": 36,
+        "retention_down": 0,
+        "no_change": 0
+      },
+      "study_session": {
+        "retention_up": 30,
+        "retention_down": 0,
+        "no_change": 0
+      },
+      "inactivity_detected": {
+        "retention_up": 0,
+        "retention_down": 151,
+        "no_change": 892
+      }
+    },
+    "event_stability_effects": {
+      "quiz_submitted": {
+        "stability_up": 18,
+        "stability_down": 3,
+        "no_change": 0
+      },
+      "revision_completed": {
+        "stability_up": 36,
+        "stability_down": 0,
+        "no_change": 0
+      },
+      "study_session": {
+        "stability_up": 30,
+        "stability_down": 0,
+        "no_change": 0
+      },
+      "inactivity_detected": {
+        "stability_up": 0,
+        "stability_down": 294,
+        "no_change": 749
+      }
+    },
+    "reinforcement_quality": {
+      "quiz_submitted": {
+        "total_events": 21,
+        "retention_increase_rate": 0.762,
+        "stability_increase_rate": 0.857
+      },
+      "revision_completed": {
+        "total_events": 36,
+        "retention_increase_rate": 1.0,
+        "stability_increase_rate": 1.0
+      },
+      "study_session": {
+        "total_events": 30,
+        "retention_increase_rate": 1.0,
+        "stability_increase_rate": 1.0
+      },
+      "inactivity_detected": {
+        "total_events": 1043,
+        "retention_decrease_rate": 0.145
+      }
+    }
+  },
+  {
+    "test": "stability_transitions",
+    "passed": true,
+    "per_archetype": {
+      "diligent": {
+        "final_mean": 0.1798,
+        "final_min": 0.1,
+        "final_max": 1.377,
+        "trajectory_sample": [
+          1.0322,
+          1.0322,
+          1.0322,
+          1.0347,
+          1.0347,
+          1.0347,
+          1.0347,
+          1.0374,
+          1.0518,
+          1.0449
+        ]
+      },
+      "cramming": {
+        "final_mean": 0.698,
+        "final_min": 0.1,
+        "final_max": 1.2762,
+        "trajectory_sample": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "struggling": {
+        "final_mean": 0.4838,
+        "final_min": 0.1,
+        "final_max": 1.0513,
+        "trajectory_sample": [
+          1.0,
+          1.0,
+          1.0012,
+          1.0012,
+          1.0012,
+          1.002,
+          1.002,
+          1.0114,
+          1.0142,
+          1.0142
+        ]
+      },
+      "coasting": {
+        "final_mean": 0.2193,
+        "final_min": 0.1,
+        "final_max": 1.0807,
+        "trajectory_sample": [
+          1.0255,
+          1.0366,
+          1.0366,
+          1.0483,
+          1.0511,
+          1.0694,
+          1.0694,
+          1.0694,
+          1.0694,
+          1.0694
+        ]
+      },
+      "absent": {
+        "final_mean": 1.0094,
+        "final_min": 1.0,
+        "final_max": 1.15,
+        "trajectory_sample": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "transition_analysis": {
+      "growth_after_revision": 54,
+      "flat_after_revision": 0,
+      "decline_after_revision": 3,
+      "growth_after_inactivity": 0,
+      "flat_after_inactivity": 749,
+      "decline_after_inactivity": 294
+    },
+    "stability_bounds": {
+      "min": 0.1,
+      "max": 1.9521
+    },
+    "revision_growth_rate": 0.947,
+    "inactivity_no_growth_rate": 1.0,
+    "cross_archetype": {
+      "diligent_mean": 0.1798,
+      "struggling_mean": 0.4838,
+      "note": "Raw mean includes untouched topics at default stability"
+    }
+  }
+]

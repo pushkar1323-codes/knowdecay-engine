@@ -1,0 +1,864 @@
+{
+  "simulation_config": {
+    "total_learners": 5,
+    "total_days": 30,
+    "seed": 42,
+    "topics_per_learner": 10
+  },
+  "archetype_summary": {
+    "diligent": {
+      "learner_count": 1,
+      "mean_final_retention": 0.17,
+      "min_final_retention": 0.05,
+      "max_final_retention": 0.5577,
+      "mean_final_stability": 0.8043,
+      "total_events": 116,
+      "total_forgetting_events": 0
+    },
+    "cramming": {
+      "learner_count": 1,
+      "mean_final_retention": 0.0715,
+      "min_final_retention": 0.05,
+      "max_final_retention": 0.17,
+      "mean_final_stability": 1.0472,
+      "total_events": 3,
+      "total_forgetting_events": 0
+    },
+    "struggling": {
+      "learner_count": 1,
+      "mean_final_retention": 0.05,
+      "min_final_retention": 0.05,
+      "max_final_retention": 0.05,
+      "mean_final_stability": 0.739,
+      "total_events": 34,
+      "total_forgetting_events": 0
+    },
+    "coasting": {
+      "learner_count": 1,
+      "mean_final_retention": 0.0746,
+      "min_final_retention": 0.05,
+      "max_final_retention": 0.2014,
+      "mean_final_stability": 0.7989,
+      "total_events": 44,
+      "total_forgetting_events": 0
+    },
+    "absent": {
+      "learner_count": 1,
+      "mean_final_retention": 0.05,
+      "min_final_retention": 0.05,
+      "max_final_retention": 0.05,
+      "mean_final_stability": 1.0,
+      "total_events": 0,
+      "total_forgetting_events": 0
+    }
+  },
+  "retention_evolution": {
+    "diligent": [
+      {
+        "day": 0,
+        "mean_retention": 0.0841,
+        "topic_count": 10
+      },
+      {
+        "day": 1,
+        "mean_retention": 0.0841,
+        "topic_count": 10
+      },
+      {
+        "day": 2,
+        "mean_retention": 0.0841,
+        "topic_count": 10
+      },
+      {
+        "day": 3,
+        "mean_retention": 0.0891,
+        "topic_count": 10
+      },
+      {
+        "day": 4,
+        "mean_retention": 0.0999,
+        "topic_count": 10
+      },
+      {
+        "day": 5,
+        "mean_retention": 0.1093,
+        "topic_count": 10
+      },
+      {
+        "day": 6,
+        "mean_retention": 0.1093,
+        "topic_count": 10
+      },
+      {
+        "day": 7,
+        "mean_retention": 0.1093,
+        "topic_count": 10
+      },
+      {
+        "day": 8,
+        "mean_retention": 0.1073,
+        "topic_count": 10
+      },
+      {
+        "day": 9,
+        "mean_retention": 0.1073,
+        "topic_count": 10
+      },
+      {
+        "day": 10,
+        "mean_retention": 0.1116,
+        "topic_count": 10
+      },
+      {
+        "day": 11,
+        "mean_retention": 0.1036,
+        "topic_count": 10
+      },
+      {
+        "day": 12,
+        "mean_retention": 0.1036,
+        "topic_count": 10
+      },
+      {
+        "day": 13,
+        "mean_retention": 0.092,
+        "topic_count": 10
+      },
+      {
+        "day": 14,
+        "mean_retention": 0.0935,
+        "topic_count": 10
+      },
+      {
+        "day": 15,
+        "mean_retention": 0.0865,
+        "topic_count": 10
+      },
+      {
+        "day": 16,
+        "mean_retention": 0.0775,
+        "topic_count": 10
+      },
+      {
+        "day": 17,
+        "mean_retention": 0.0712,
+        "topic_count": 10
+      },
+      {
+        "day": 18,
+        "mean_retention": 0.086,
+        "topic_count": 10
+      },
+      {
+        "day": 19,
+        "mean_retention": 0.084,
+        "topic_count": 10
+      },
+      {
+        "day": 20,
+        "mean_retention": 0.0891,
+        "topic_count": 10
+      },
+      {
+        "day": 21,
+        "mean_retention": 0.1107,
+        "topic_count": 10
+      },
+      {
+        "day": 22,
+        "mean_retention": 0.1359,
+        "topic_count": 10
+      },
+      {
+        "day": 23,
+        "mean_retention": 0.1409,
+        "topic_count": 10
+      },
+      {
+        "day": 24,
+        "mean_retention": 0.1409,
+        "topic_count": 10
+      },
+      {
+        "day": 25,
+        "mean_retention": 0.1409,
+        "topic_count": 10
+      },
+      {
+        "day": 26,
+        "mean_retention": 0.1515,
+        "topic_count": 10
+      },
+      {
+        "day": 27,
+        "mean_retention": 0.1614,
+        "topic_count": 10
+      },
+      {
+        "day": 28,
+        "mean_retention": 0.1664,
+        "topic_count": 10
+      },
+      {
+        "day": 29,
+        "mean_retention": 0.17,
+        "topic_count": 10
+      }
+    ],
+    "cramming": [
+      {
+        "day": 0,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 1,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 2,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 3,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 4,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 5,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 6,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 7,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 8,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 9,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 10,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 11,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 12,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 13,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 14,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 15,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 16,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 17,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 18,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 19,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 20,
+        "mean_retention": 0.0545,
+        "topic_count": 10
+      },
+      {
+        "day": 21,
+        "mean_retention": 0.0545,
+        "topic_count": 10
+      },
+      {
+        "day": 22,
+        "mean_retention": 0.0545,
+        "topic_count": 10
+      },
+      {
+        "day": 23,
+        "mean_retention": 0.0545,
+        "topic_count": 10
+      },
+      {
+        "day": 24,
+        "mean_retention": 0.0595,
+        "topic_count": 10
+      },
+      {
+        "day": 25,
+        "mean_retention": 0.0715,
+        "topic_count": 10
+      },
+      {
+        "day": 26,
+        "mean_retention": 0.0715,
+        "topic_count": 10
+      },
+      {
+        "day": 27,
+        "mean_retention": 0.0715,
+        "topic_count": 10
+      },
+      {
+        "day": 28,
+        "mean_retention": 0.0715,
+        "topic_count": 10
+      },
+      {
+        "day": 29,
+        "mean_retention": 0.0715,
+        "topic_count": 10
+      }
+    ],
+    "struggling": [
+      {
+        "day": 0,
+        "mean_retention": 0.055,
+        "topic_count": 10
+      },
+      {
+        "day": 1,
+        "mean_retention": 0.0602,
+        "topic_count": 10
+      },
+      {
+        "day": 2,
+        "mean_retention": 0.0602,
+        "topic_count": 10
+      },
+      {
+        "day": 3,
+        "mean_retention": 0.0602,
+        "topic_count": 10
+      },
+      {
+        "day": 4,
+        "mean_retention": 0.0602,
+        "topic_count": 10
+      },
+      {
+        "day": 5,
+        "mean_retention": 0.0602,
+        "topic_count": 10
+      },
+      {
+        "day": 6,
+        "mean_retention": 0.0652,
+        "topic_count": 10
+      },
+      {
+        "day": 7,
+        "mean_retention": 0.0652,
+        "topic_count": 10
+      },
+      {
+        "day": 8,
+        "mean_retention": 0.0672,
+        "topic_count": 10
+      },
+      {
+        "day": 9,
+        "mean_retention": 0.0672,
+        "topic_count": 10
+      },
+      {
+        "day": 10,
+        "mean_retention": 0.0672,
+        "topic_count": 10
+      },
+      {
+        "day": 11,
+        "mean_retention": 0.0672,
+        "topic_count": 10
+      },
+      {
+        "day": 12,
+        "mean_retention": 0.0672,
+        "topic_count": 10
+      },
+      {
+        "day": 13,
+        "mean_retention": 0.0672,
+        "topic_count": 10
+      },
+      {
+        "day": 14,
+        "mean_retention": 0.0672,
+        "topic_count": 10
+      },
+      {
+        "day": 15,
+        "mean_retention": 0.0582,
+        "topic_count": 10
+      },
+      {
+        "day": 16,
+        "mean_retention": 0.051,
+        "topic_count": 10
+      },
+      {
+        "day": 17,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 18,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 19,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 20,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 21,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 22,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 23,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 24,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 25,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 26,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 27,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 28,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 29,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      }
+    ],
+    "coasting": [
+      {
+        "day": 0,
+        "mean_retention": 0.0858,
+        "topic_count": 10
+      },
+      {
+        "day": 1,
+        "mean_retention": 0.0858,
+        "topic_count": 10
+      },
+      {
+        "day": 2,
+        "mean_retention": 0.0858,
+        "topic_count": 10
+      },
+      {
+        "day": 3,
+        "mean_retention": 0.0858,
+        "topic_count": 10
+      },
+      {
+        "day": 4,
+        "mean_retention": 0.0858,
+        "topic_count": 10
+      },
+      {
+        "day": 5,
+        "mean_retention": 0.0858,
+        "topic_count": 10
+      },
+      {
+        "day": 6,
+        "mean_retention": 0.0858,
+        "topic_count": 10
+      },
+      {
+        "day": 7,
+        "mean_retention": 0.0858,
+        "topic_count": 10
+      },
+      {
+        "day": 8,
+        "mean_retention": 0.0858,
+        "topic_count": 10
+      },
+      {
+        "day": 9,
+        "mean_retention": 0.0858,
+        "topic_count": 10
+      },
+      {
+        "day": 10,
+        "mean_retention": 0.0858,
+        "topic_count": 10
+      },
+      {
+        "day": 11,
+        "mean_retention": 0.0858,
+        "topic_count": 10
+      },
+      {
+        "day": 12,
+        "mean_retention": 0.0858,
+        "topic_count": 10
+      },
+      {
+        "day": 13,
+        "mean_retention": 0.0858,
+        "topic_count": 10
+      },
+      {
+        "day": 14,
+        "mean_retention": 0.0858,
+        "topic_count": 10
+      },
+      {
+        "day": 15,
+        "mean_retention": 0.0698,
+        "topic_count": 10
+      },
+      {
+        "day": 16,
+        "mean_retention": 0.0518,
+        "topic_count": 10
+      },
+      {
+        "day": 17,
+        "mean_retention": 0.0603,
+        "topic_count": 10
+      },
+      {
+        "day": 18,
+        "mean_retention": 0.0667,
+        "topic_count": 10
+      },
+      {
+        "day": 19,
+        "mean_retention": 0.0706,
+        "topic_count": 10
+      },
+      {
+        "day": 20,
+        "mean_retention": 0.0706,
+        "topic_count": 10
+      },
+      {
+        "day": 21,
+        "mean_retention": 0.0706,
+        "topic_count": 10
+      },
+      {
+        "day": 22,
+        "mean_retention": 0.0706,
+        "topic_count": 10
+      },
+      {
+        "day": 23,
+        "mean_retention": 0.0706,
+        "topic_count": 10
+      },
+      {
+        "day": 24,
+        "mean_retention": 0.0706,
+        "topic_count": 10
+      },
+      {
+        "day": 25,
+        "mean_retention": 0.0724,
+        "topic_count": 10
+      },
+      {
+        "day": 26,
+        "mean_retention": 0.0724,
+        "topic_count": 10
+      },
+      {
+        "day": 27,
+        "mean_retention": 0.0744,
+        "topic_count": 10
+      },
+      {
+        "day": 28,
+        "mean_retention": 0.0746,
+        "topic_count": 10
+      },
+      {
+        "day": 29,
+        "mean_retention": 0.0746,
+        "topic_count": 10
+      }
+    ],
+    "absent": [
+      {
+        "day": 0,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 1,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 2,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 3,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 4,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 5,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 6,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 7,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 8,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 9,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 10,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 11,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 12,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 13,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 14,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 15,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 16,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 17,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 18,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 19,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 20,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 21,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 22,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 23,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 24,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 25,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 26,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 27,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 28,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      },
+      {
+        "day": 29,
+        "mean_retention": 0.05,
+        "topic_count": 10
+      }
+    ]
+  },
+  "scheduling_efficiency": {
+    "total_topics_evaluated": 50,
+    "short_intervals": 50,
+    "optimal_intervals": 0,
+    "long_intervals": 0,
+    "optimal_rate": 0.0
+  },
+  "engine_invariants": [
+    {
+      "name": "retention_bounds",
+      "passed": true,
+      "detail": "All retention scores in [0, 1]"
+    },
+    {
+      "name": "stability_positive",
+      "passed": true,
+      "detail": "All stability scores >= 0"
+    },
+    {
+      "name": "decay_bounded",
+      "passed": true,
+      "detail": "All decay rates in (0, 10)"
+    },
+    {
+      "name": "priority_ordering",
+      "passed": true,
+      "detail": "1/16 misordered (6.2%)"
+    },
+    {
+      "name": "schedule_retention_adaptation",
+      "passed": true,
+      "detail": "0/10 misordered (0.0%)"
+    },
+    {
+      "name": "diligent_vs_struggling",
+      "passed": true,
+      "detail": "Diligent=0.170 vs Struggling=0.050"
+    },
+    {
+      "name": "forgetting_events_tracked",
+      "passed": true,
+      "detail": "8/24 with decay detected (33.3%)"
+    }
+  ],
+  "invariants_passed": 7,
+  "invariants_total": 7,
+  "all_invariants_pass": true
+}
