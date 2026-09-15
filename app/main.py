@@ -101,13 +101,17 @@ from app.api.users import router as users_router  # noqa: E402
 app.include_router(auth_router, prefix="/v1")
 app.include_router(users_router, prefix="/v1")
 
-# ── Institution & Course Management (Phase 16) ───────────────────────────────
+# ── Institution & Course Management ───────────────────────────────────────────
 from app.api.institutions import router as institutions_router  # noqa: E402
 from app.api.courses import router as courses_router  # noqa: E402
 app.include_router(institutions_router, prefix="/v1")
 app.include_router(courses_router, prefix="/v1")
 
-# ── Learning Data Collection (Phase 16) ──────────────────────────────────────
+# ── Curriculum Provisioning ───────────────────────────────────────────────────
+from app.api.curriculum import router as curriculum_router  # noqa: E402
+app.include_router(curriculum_router, prefix="/v1")
+
+# ── Learning Data Collection ──────────────────────────────────────────────────
 from app.api.sessions import router as sessions_router  # noqa: E402
 from app.api.quizzes import router as quizzes_router  # noqa: E402
 from app.api.events import router as events_router  # noqa: E402

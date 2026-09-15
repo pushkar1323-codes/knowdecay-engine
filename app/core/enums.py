@@ -29,7 +29,7 @@ class ApiVersion(str, Enum):
 
 
 class UserRole(str, Enum):
-    """User roles for Role-Based Access Control (Phase 13)."""
+    """User roles for Role-Based Access Control."""
     SUPER_ADMIN = "super_admin"
     INSTITUTION_ADMIN = "institution_admin"
     TEACHER = "teacher"

@@ -1,7 +1,7 @@
 """
 tests/test_models/test_database_validation.py
 ──────────────────────────────────────────────
-Phase 11: Database model validation.
+Database model validation.
 
 Validates:
   • All ORM models define expected columns

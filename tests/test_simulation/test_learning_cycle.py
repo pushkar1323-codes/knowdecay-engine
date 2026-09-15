@@ -1,7 +1,7 @@
 """
 tests/test_simulation/test_learning_cycle.py
 ──────────────────────────────────────────────
-Phase 11: Complete learning cycle validation.
+Complete learning cycle validation.
 
 Validates the full revision lifecycle:
   Study → Retention Prediction → Revision Recommendation →

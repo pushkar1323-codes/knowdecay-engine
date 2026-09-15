@@ -94,7 +94,7 @@ class CurrentState:
     forgetting_probability: float = 1.0
     urgency_score: float = 0.0
 
-    # Adaptive forgetting curve fields (Phase 8.5)
+    # Adaptive forgetting curve fields
     base_stability: float = 1.0
     revision_quality: float = 0.5
     difficulty_factor: float = 0.5
@@ -166,7 +166,7 @@ class StateDelta:
     forgetting_probability_new: float | None = None  # absolute replacement
     urgency_delta: float = 0.0
 
-    # Adaptive forgetting curve deltas (Phase 8.5)
+    # Adaptive forgetting curve deltas
     base_stability_new: float | None = None         # absolute replacement
     revision_quality_new: float | None = None        # absolute replacement
     difficulty_factor_new: float | None = None       # absolute replacement
@@ -230,7 +230,7 @@ class RecalibrationOutput:
     changes: list[ChangeReason]
     summary: str
 
-    # Adaptive forgetting curve values (Phase 8.5) — defaults last
+    # Adaptive forgetting curve values — defaults last
     new_base_stability: float = 1.0
     new_revision_quality: float = 0.5
     new_difficulty_factor: float = 0.5
@@ -363,7 +363,7 @@ def recalibrate_quiz(
     # Urgency: inversely proportional to quiz score
     urgency_delta = -0.1 * qs + 0.05 * (1 - qs)  # good quiz ↓urgency, bad quiz ↑urgency
 
-    # ── Adaptive stability evolution (Phase 8.5) ──────────────────────────────
+    # ── Adaptive stability evolution ──────────────────────────────
     stab_evo = evolve_stability(
         current_base=state.base_stability,
         event_quality=qs,
@@ -482,7 +482,7 @@ def recalibrate_revision(
     # Forgetting probability
     new_fp = round(1.0 - new_ret, 4)
 
-    # ── Adaptive stability evolution (Phase 8.5) ──────────────────────────────
+    # ── Adaptive stability evolution ──────────────────────────────
     # Revision quality: use a moderate quality signal (0.6 for completing revision)
     rev_quality_signal = 0.6
     stab_evo = evolve_stability(
@@ -594,7 +594,7 @@ def recalibrate_study(
     # Strength gain
     strength_gain = STUDY_STRENGTH_GAIN * (effective_minutes / STUDY_SATURATION)
 
-    # ── Adaptive stability evolution (Phase 8.5) ──────────────────────────────
+    # ── Adaptive stability evolution ──────────────────────────────
     # Study is weaker than revision — quality signal = 0.4
     study_quality_signal = 0.4 * (effective_minutes / STUDY_SATURATION)
     stab_evo = evolve_stability(
@@ -687,7 +687,7 @@ def recalibrate_inactivity(
     # Forgetting probability
     new_fp = round(1.0 - new_ret, 4)
 
-    # ── Adaptive stability degradation (Phase 8.5) ────────────────────────────
+    # ── Adaptive stability degradation ────────────────────────────
     new_base_stab = degrade_stability(
         current_base=state.base_stability,
         days_inactive=days,
@@ -757,7 +757,7 @@ def apply_delta(state: CurrentState, delta: StateDelta) -> dict[str, float | int
     new_fp = _clamp01(new_fp)
     new_urgency = _clamp01(state.urgency_score + delta.urgency_delta)
 
-    # Adaptive forgetting curve fields (Phase 8.5)
+    # Adaptive forgetting curve fields
     new_base_stab = delta.base_stability_new if delta.base_stability_new is not None else state.base_stability
     new_base_stab = max(new_base_stab, 0.1)
     new_rev_quality = delta.revision_quality_new if delta.revision_quality_new is not None else state.revision_quality

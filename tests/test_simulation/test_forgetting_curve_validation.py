@@ -16,7 +16,7 @@ Test categories:
   3. Stability ordering  — higher S → slower decay
   4. Floor / ceiling     — 0.05 ≤ R ≤ 1.0
   5. Recalibration path  — study event → verify decay over time
-  6. Archetype curves    — 5 Phase 11 archetypes produce valid curves
+  6. Archetype curves    — 5 learner archetypes produce valid curves
 
 All tests are pure — no DB, no HTTP, no I/O.
 """
@@ -59,7 +59,7 @@ RETENTION_CEILING: float = 1.0
 ABS_TOL: float = 1e-4   # tolerance for exponential match
 SEED: int = 42
 
-PHASE_11_ARCHETYPES: list[Archetype] = [
+LEARNER_ARCHETYPES: list[Archetype] = [
     Archetype.BEGINNER,
     Archetype.AVERAGE,
     Archetype.ADVANCED,
@@ -367,21 +367,21 @@ class TestMultiStabilitySweep:
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-#  7. Phase 11 Archetype Forgetting Curves
+#  7. Archetype Forgetting Curves
 # ═══════════════════════════════════════════════════════════════════════════════
 
 class TestArchetypeForgettingCurves:
     """
-    For each Phase 11 archetype, generate a learner profile, derive
+    For each learner archetype, generate a learner profile, derive
     representative inputs, and validate the forgetting curve.
     """
 
     @pytest.fixture(scope="class")
     def archetype_learners(self):
-        """Generate one learner per Phase 11 archetype."""
+        """Generate one learner per archetype."""
         rng = random.Random(SEED)
         learners = {}
-        for arch in PHASE_11_ARCHETYPES:
+        for arch in LEARNER_ARCHETYPES:
             config = ARCHETYPE_CONFIGS[arch]
             # Deterministic mid-range quiz score for this archetype
             score_lo, score_hi = config["quiz_score_range"]
@@ -394,7 +394,7 @@ class TestArchetypeForgettingCurves:
             }
         return learners
 
-    @pytest.mark.parametrize("archetype", PHASE_11_ARCHETYPES)
+    @pytest.mark.parametrize("archetype", LEARNER_ARCHETYPES)
     def test_archetype_curve_monotonic(self, archetype, archetype_learners):
         """Each archetype's forgetting curve must decrease monotonically."""
         params = archetype_learners[archetype]
@@ -412,7 +412,7 @@ class TestArchetypeForgettingCurves:
             )
             prev_r = out.retention
 
-    @pytest.mark.parametrize("archetype", PHASE_11_ARCHETYPES)
+    @pytest.mark.parametrize("archetype", LEARNER_ARCHETYPES)
     def test_archetype_curve_within_bounds(self, archetype, archetype_learners):
         """Every point on an archetype's curve must respect floor/ceiling."""
         params = archetype_learners[archetype]
@@ -474,7 +474,7 @@ class TestArchetypeForgettingCurves:
             f"Beginner S_eff={out_beg.adaptive_stability:.4f}"
         )
 
-    @pytest.mark.parametrize("archetype", PHASE_11_ARCHETYPES)
+    @pytest.mark.parametrize("archetype", LEARNER_ARCHETYPES)
     def test_archetype_curve_matches_exponential(self, archetype, archetype_learners):
         """Each archetype's curve must match the exponential formula exactly."""
         params = archetype_learners[archetype]

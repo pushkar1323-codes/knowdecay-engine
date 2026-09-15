@@ -153,3 +153,40 @@ require_any_authenticated = require_roles(
     UserRole.STUDENT,
     UserRole.API_CLIENT,
 )
+
+# Roles allowed to provision curriculum hierarchy (server-to-server integration).
+# API_CLIENT is the trusted backend integration role — credentials must never
+# be exposed to browsers or end users.
+require_provisioner = require_roles(
+    UserRole.SUPER_ADMIN, UserRole.INSTITUTION_ADMIN, UserRole.API_CLIENT
+)
+
+
+# ── Learner data ownership enforcement ────────────────────────────────────────
+
+# Roles that can access any user's learner data (admin / platform integration).
+_PRIVILEGED_ROLES = frozenset({
+    UserRole.SUPER_ADMIN.value,
+    UserRole.INSTITUTION_ADMIN.value,
+    UserRole.API_CLIENT.value,
+})
+
+
+def enforce_learner_access(user_id: uuid.UUID, current_user: User) -> None:
+    """
+    Verify that *current_user* is authorized to access data for *user_id*.
+
+    Rules:
+      - SUPER_ADMIN, INSTITUTION_ADMIN, API_CLIENT → can access any user's data
+      - STUDENT, TEACHER → can only access their own data
+
+    Raises AuthorizationError if the caller is not permitted.
+    """
+    if current_user.role in _PRIVILEGED_ROLES:
+        return
+    if current_user.id != user_id:
+        logger.warning(
+            "Ownership denied | caller=%s role=%s target_user=%s",
+            current_user.id, current_user.role, user_id,
+        )
+        raise AuthorizationError("You can only access your own data")

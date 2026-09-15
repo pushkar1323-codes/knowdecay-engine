@@ -4,7 +4,7 @@ Revision ID: 0004
 Revises: 0003_add_retention_evolution_fields
 Create Date: 2026-07-30
 
-Phase 13: Authentication & Security
+Authentication & Security:
   - Add password_hash, role, is_active, updated_at to users table
   - Create refresh_tokens table
   - Set defaults for existing rows

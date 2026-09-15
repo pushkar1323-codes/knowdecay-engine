@@ -1,7 +1,7 @@
 """
 tests/test_simulation/test_scheduler_validation.py
 ────────────────────────────────────────────────────
-Phase 11: Scheduler engine validation under realistic scenarios.
+Scheduler engine validation under realistic scenarios.
 
 Validates:
   • Revision intervals adapt to retention

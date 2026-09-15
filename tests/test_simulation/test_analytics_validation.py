@@ -1,7 +1,7 @@
 """
 tests/test_simulation/test_analytics_validation.py
 ────────────────────────────────────────────────────
-Phase 11: Analytics engine validation under realistic simulation.
+Analytics engine validation under realistic simulation.
 
 Validates:
   • Retention history tracking across simulations

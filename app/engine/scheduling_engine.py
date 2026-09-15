@@ -88,7 +88,7 @@ class ScheduleInput:
     # Time context
     days_since_last_revision: float = 0.0
 
-    # Adaptive forgetting curve (Phase 8.5) — used in place of
+    # Adaptive forgetting curve — used in place of
     # stability_score when available for cognitively grounded intervals
     adaptive_stability: float | None = None
 
@@ -342,7 +342,7 @@ def compute_schedule(
     mode = select_mode(inp.days_until_exam)
 
     # ── 2. Base interval ──────────────────────────────────────────────────────────
-    # Use adaptive_stability from forgetting curve when available (Phase 8.5)
+    # Use adaptive_stability from forgetting curve when available
     effective_stability = inp.adaptive_stability if inp.adaptive_stability is not None else inp.stability_score
     base, ret_factor = compute_base_interval(
         effective_stability, inp.retention_score, inp.revision_count,

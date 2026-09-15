@@ -1,7 +1,7 @@
 """
 tests/test_infrastructure/test_exceptions.py
 ──────────────────────────────────────────────
-Tests for Phase 12 exception handling:
+Tests for exception handling:
   - All custom exception types (status codes, messages)
   - Exception handlers return standardised responses
   - Request ID appears in error responses

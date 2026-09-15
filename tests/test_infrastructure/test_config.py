@@ -1,10 +1,10 @@
 """
 tests/test_infrastructure/test_config.py
 ──────────────────────────────────────────
-Tests for Phase 12 configuration management:
+Tests for configuration management:
   - Default settings load correctly
   - Environment-specific properties
-  - New Phase 12 settings
+  - Infrastructure settings
   - CORS origins parsing
 """
 
@@ -54,10 +54,10 @@ class TestDefaultSettings:
         assert self.settings.ml_blend_weight == 0.0
 
 
-# ── Phase 12 Settings ────────────────────────────────────────────────────────
+# ── Infrastructure Settings ──────────────────────────────────────────────────
 
-class TestPhase12Settings:
-    """Verify Phase 12 infrastructure settings."""
+class TestInfrastructureSettings:
+    """Verify infrastructure settings."""
 
     def setup_method(self):
         self.settings = Settings(

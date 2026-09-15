@@ -6,12 +6,17 @@ REST endpoints for revision scheduling.
 Endpoint summary:
   POST /v1/schedule/next       — compute next revision time for one topic
   POST /v1/schedule/generate   — generate full schedule for multiple topics
+
+All endpoints require authentication. Learners can only access their own
+data unless the caller is a privileged role (admin / API_CLIENT).
 """
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.deps import get_db
+from app.deps_auth import enforce_learner_access, get_current_user
+from app.models.user import User
 from app.schemas.schedule import (
     ScheduleGenerateRequest,
     ScheduleGenerateResponse,
@@ -30,6 +35,7 @@ router = APIRouter(prefix="/schedule", tags=["Scheduling Engine"])
 )
 def schedule_next(
     payload: ScheduleSingleRequest,
+    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     """
@@ -44,6 +50,7 @@ def schedule_next(
 
     Optionally pass `days_until_exam` to activate exam-aware scheduling.
     """
+    enforce_learner_access(payload.user_id, current_user)
     return schedule_service.schedule_single(
         db,
         payload.user_id,
@@ -59,6 +66,7 @@ def schedule_next(
 )
 def generate_schedule(
     payload: ScheduleGenerateRequest,
+    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     """
@@ -69,6 +77,7 @@ def generate_schedule(
 
     Use `max_per_day` to control workload (default: 10).
     """
+    enforce_learner_access(payload.user_id, current_user)
     return schedule_service.schedule_batch(
         db,
         payload.user_id,

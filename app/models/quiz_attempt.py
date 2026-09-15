@@ -57,7 +57,7 @@ class QuizAttempt(Base):
         DateTime(timezone=True), server_default=func.now(), nullable=False, index=True
     )
 
-    # ── Enhanced quiz tracking (Phase 16 — all nullable) ──────────────────────
+    # ── Enhanced quiz tracking (all nullable) ──────────────────────────────────
     attempt_number: Mapped[int | None] = mapped_column(
         Integer, nullable=True
     )  # which attempt for this user×topic? (1st, 2nd, etc.)

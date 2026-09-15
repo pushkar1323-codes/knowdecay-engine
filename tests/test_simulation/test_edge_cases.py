@@ -1,7 +1,7 @@
 """
 tests/test_simulation/test_edge_cases.py
 ─────────────────────────────────────────
-Phase 11: Edge case testing for the KnowDecay engine.
+Edge case testing for the KnowDecay engine.
 
 Tests extreme and boundary scenarios:
   • Learner who never revises

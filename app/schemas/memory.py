@@ -34,7 +34,7 @@ class MemoryStateResponse(BaseModel):
     forgetting_probability: float = Field(ge=0.0, le=1.0)
     urgency_score: float = Field(ge=0.0)
 
-    # Phase 8.5 — adaptive forgetting curve
+    # Adaptive forgetting curve
     base_stability: float = Field(default=1.0, ge=0.0)
     revision_quality: float = Field(default=0.5, ge=0.0, le=1.0)
     difficulty_factor: float = Field(default=1.0, ge=0.0)

@@ -1,7 +1,7 @@
 """
 tests/test_infrastructure/test_middleware.py
 ─────────────────────────────────────────────
-Tests for Phase 12 middleware pipeline:
+Tests for middleware pipeline:
   - Request ID generation and propagation
   - Client-supplied request ID pass-through
   - Logging middleware captures method/path/status/duration

@@ -57,7 +57,7 @@ _UUID = uuid.uuid4()
 # ═══════════════════════════════════════════════════════════════════════════════
 
 class TestMemoryStateResponseFields:
-    """MemoryStateResponse must expose all Phase 8.5 + retention evolution fields."""
+    """MemoryStateResponse must expose all adaptive forgetting curve + retention evolution fields."""
 
     @pytest.fixture
     def full_response(self):
@@ -122,7 +122,7 @@ class TestMemoryStateResponseFields:
         assert MemoryStateResponse.model_config["from_attributes"] is True
 
     def test_field_count_minimum(self):
-        """MemoryStateResponse should have at least 33 fields (12 core + 4 Phase 8.5 + 15 evolution + timestamps)."""
+        """MemoryStateResponse should have at least 33 fields (12 core + 4 adaptive forgetting + 15 evolution + timestamps)."""
         field_count = len(MemoryStateResponse.model_fields)
         assert field_count >= 33
 
@@ -256,7 +256,7 @@ class TestStateDeltaResponseFields:
         fields = StateDeltaResponse.model_fields
         for f in ["base_stability_new", "revision_quality_new",
                    "difficulty_factor_new", "performance_trend_new"]:
-            assert f in fields, f"Missing Phase 8.5 delta: {f}"
+            assert f in fields, f"Missing adaptive forgetting delta: {f}"
 
     def test_defaults_are_none_or_zero(self):
         delta = StateDeltaResponse(

@@ -313,7 +313,7 @@ class TestApplyDelta:
             "retention_score", "stability_score", "decay_rate",
             "confidence_score", "revision_strength", "revision_count",
             "forgetting_probability", "urgency_score",
-            # Adaptive forgetting curve fields (Phase 8.5)
+            # Adaptive forgetting curve fields
             "base_stability", "revision_quality",
             "difficulty_factor", "performance_trend",
             # Retention evolution fields

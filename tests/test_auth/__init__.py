@@ -1,1 +1,1 @@
-"""Tests for authentication and security — Phase 13."""
+"""Tests for authentication and security."""

@@ -1,7 +1,7 @@
 """
 tests/test_simulation/test_ml_readiness.py
 ────────────────────────────────────────────
-Phase 11: ML readiness validation.
+ML readiness validation.
 
 Validates that MemoryState and engine outputs collect all data fields
 required for future ML training pipelines:

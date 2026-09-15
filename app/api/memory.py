@@ -17,6 +17,9 @@ Endpoint summary:
   GET  /v1/memory/{user_id}/aggregate/chapter/{id}  — chapter aggregate
   GET  /v1/memory/{user_id}/aggregate/module/{id}   — module aggregate
   GET  /v1/memory/{user_id}/aggregate/subject/{id}  — subject aggregate
+
+All endpoints require authentication. Learners can only access their own
+data unless the caller is a privileged role (admin / API_CLIENT).
 """
 
 import uuid
@@ -26,6 +29,8 @@ from sqlalchemy.orm import Session
 
 from app.core.exceptions import NotFoundError
 from app.deps import get_db
+from app.deps_auth import enforce_learner_access, get_current_user
+from app.models.user import User
 from app.schemas.memory import (
     BatchMemoryStateRequest,
     BatchMemoryStateResponse,
@@ -50,8 +55,10 @@ router = APIRouter(prefix="/memory", tags=["Memory States"])
 def get_state(
     user_id: uuid.UUID,
     topic_id: uuid.UUID,
+    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
+    enforce_learner_access(user_id, current_user)
     state = memory_service.get_memory_state(db, user_id, topic_id)
     if state is None:
         raise NotFoundError("MemoryState", f"user={user_id} topic={topic_id}")
@@ -66,12 +73,14 @@ def get_state(
 )
 def init_state(
     payload: MemoryStateInit,
+    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     """
     Create or return existing memory state for a user × topic pair.
     If the state already exists, the existing values are preserved.
     """
+    enforce_learner_access(payload.user_id, current_user)
     state = memory_service.init_memory_state(db, payload)
     return state
 
@@ -87,8 +96,10 @@ def list_states(
     user_id: uuid.UUID,
     limit: int = Query(default=100, ge=1, le=500),
     offset: int = Query(default=0, ge=0),
+    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
+    enforce_learner_access(user_id, current_user)
     states = memory_service.list_memory_states(db, user_id, limit, offset)
     return [MemoryStateSummary.model_validate(s) for s in states]
 
@@ -100,9 +111,11 @@ def list_states(
 )
 def list_overdue(
     user_id: uuid.UUID,
+    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     """Topics where next_revision_at is in the past or NULL (never scheduled)."""
+    enforce_learner_access(user_id, current_user)
     states = memory_service.list_overdue(db, user_id)
     return [MemoryStateSummary.model_validate(s) for s in states]
 
@@ -115,9 +128,11 @@ def list_overdue(
 def list_at_risk(
     user_id: uuid.UUID,
     threshold: float = Query(default=0.4, ge=0.0, le=1.0),
+    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     """Topics where retention_score is below the given threshold."""
+    enforce_learner_access(user_id, current_user)
     states = memory_service.list_at_risk(db, user_id, threshold)
     return [MemoryStateSummary.model_validate(s) for s in states]
 
@@ -131,8 +146,10 @@ def list_at_risk(
 )
 def batch_get(
     payload: BatchMemoryStateRequest,
+    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
+    enforce_learner_access(payload.user_id, current_user)
     states = memory_service.batch_get(db, payload.user_id, payload.topic_ids)
     summaries = [MemoryStateSummary.model_validate(s) for s in states]
     return BatchMemoryStateResponse(
@@ -151,8 +168,10 @@ def batch_get(
 )
 def user_overview(
     user_id: uuid.UUID,
+    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
+    enforce_learner_access(user_id, current_user)
     return memory_service.get_user_overview(db, user_id)
 
 
@@ -164,8 +183,10 @@ def user_overview(
 def chapter_aggregate(
     user_id: uuid.UUID,
     chapter_id: uuid.UUID,
+    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
+    enforce_learner_access(user_id, current_user)
     return memory_service.aggregate_for_chapter(db, user_id, chapter_id)
 
 
@@ -177,8 +198,10 @@ def chapter_aggregate(
 def module_aggregate(
     user_id: uuid.UUID,
     module_id: uuid.UUID,
+    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
+    enforce_learner_access(user_id, current_user)
     return memory_service.aggregate_for_module(db, user_id, module_id)
 
 
@@ -190,6 +213,8 @@ def module_aggregate(
 def subject_aggregate(
     user_id: uuid.UUID,
     subject_id: uuid.UUID,
+    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
+    enforce_learner_access(user_id, current_user)
     return memory_service.aggregate_for_subject(db, user_id, subject_id)

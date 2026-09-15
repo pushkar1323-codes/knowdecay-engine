@@ -1,7 +1,7 @@
 """
 tests/test_simulation/test_performance.py
 ──────────────────────────────────────────
-Phase 11: Performance validation for KnowDecay engine operations.
+Performance validation for KnowDecay engine operations.
 
 Validates that core engine computations complete within acceptable time:
   • Retention computation

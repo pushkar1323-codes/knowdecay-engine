@@ -1,7 +1,7 @@
 """
 tests/test_infrastructure/test_health.py
 ──────────────────────────────────────────
-Tests for Phase 12 health endpoints:
+Tests for health endpoints:
   - GET /health backward compatibility
   - GET /health/live always returns 200
   - GET /health/ready returns status

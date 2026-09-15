@@ -85,7 +85,7 @@ class RevisionLog(Base):
         Float, nullable=True
     )  # NULL for first revision
 
-    # ── Enhanced revision tracking (Phase 16 — all nullable) ──────────────────
+    # ── Enhanced revision tracking (all nullable) ──────────────────────────────
     revision_method: Mapped[str | None] = mapped_column(
         String(50), nullable=True
     )  # 'scheduled', 'manual', 'adaptive', 'spaced_repetition'

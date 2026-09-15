@@ -1,5 +1,5 @@
 """
-Phase 16 — Learning Data & Analytics Foundation
+Learning Data & Analytics Foundation
 Creates 9 new tables, enhances 3 existing tables, converts
 institution_id columns from String to UUID FK.
 

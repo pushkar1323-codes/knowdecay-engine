@@ -3,9 +3,9 @@ app/core/responses.py
 ──────────────────────
 Standard API response envelope for infrastructure endpoints.
 
-Phase 12: Applied to new infrastructure endpoints only.
+Applied to infrastructure endpoints only.
 Existing engine API endpoints retain their current response format.
-Designed for easy migration to /api/v2 in a future phase.
+Designed for easy migration to /api/v2 in the future.
 
 Usage in infrastructure endpoints:
     from app.core.responses import success_response, error_response

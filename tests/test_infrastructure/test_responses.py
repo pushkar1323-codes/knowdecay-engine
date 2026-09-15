@@ -1,7 +1,7 @@
 """
 tests/test_infrastructure/test_responses.py
 ─────────────────────────────────────────────
-Tests for Phase 12 standard response envelope:
+Tests for standard response envelope:
   - success_response() format
   - error_response() format
   - paginated_response() format

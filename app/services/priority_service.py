@@ -110,8 +110,8 @@ def _build_priority_input(
         difficulty=difficulty,
         importance_weight=importance,
         days_until_exam=days_until_exam,
-        weakness_trend=0.0,         # Phase 7 recalibration will populate this
-        recent_quiz_score=None,     # Phase 7 recalibration will populate this
+        weakness_trend=0.0,         # TODO: populate from recalibration history
+        recent_quiz_score=None,     # TODO: populate from recalibration history
     )
 
 

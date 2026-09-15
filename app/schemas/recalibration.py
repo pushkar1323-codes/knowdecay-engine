@@ -69,7 +69,7 @@ class StateDeltaResponse(BaseModel):
     forgetting_probability_new: float | None
     urgency_delta: float
 
-    # Phase 8.5 — adaptive forgetting curve deltas
+    # Adaptive forgetting curve deltas
     base_stability_new: float | None = None
     revision_quality_new: float | None = None
     difficulty_factor_new: float | None = None
@@ -115,7 +115,7 @@ class RecalibrationResponse(BaseModel):
     new_forgetting_probability: float = Field(ge=0.0, le=1.0)
     new_urgency: float = Field(ge=0.0, le=1.0)
 
-    # New state values — Phase 8.5
+    # New state values — adaptive forgetting curve
     new_base_stability: float = Field(default=1.0, ge=0.0)
     new_revision_quality: float = Field(default=0.5, ge=0.0, le=1.0)
     new_difficulty_factor: float = Field(default=1.0, ge=0.0)

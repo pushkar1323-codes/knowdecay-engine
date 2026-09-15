@@ -1,7 +1,7 @@
 """
 0002_add_adaptive_forgetting_fields.py
 ──────────────────────────────────────
-Phase 8.5 migration: Adaptive Forgetting Curve fields.
+Add adaptive forgetting curve fields to memory_states.
 
 Adds to memory_states:
   - base_stability        (float, default 1.0)

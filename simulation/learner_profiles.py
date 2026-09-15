@@ -30,7 +30,7 @@ class Archetype(str, Enum):
     STRUGGLING = "struggling"
     COASTING = "coasting"
     ABSENT = "absent"
-    # Phase 11 archetypes
+    # Learner archetypes
     BEGINNER = "beginner"
     AVERAGE = "average"
     ADVANCED = "advanced"
@@ -102,7 +102,7 @@ ARCHETYPE_CONFIGS = {
         "inactivity_probability": 0.40,
         "inactivity_duration_range": (5, 14),
     },
-    # ── Phase 11 Archetypes ───────────────────────────────────────────────────
+    # ── Additional Archetypes ─────────────────────────────────────────────────
     Archetype.BEGINNER: {
         "quiz_score_range": (0.35, 0.55),
         "revision_probability": 0.45,

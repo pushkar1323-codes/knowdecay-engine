@@ -21,6 +21,9 @@ Advanced analytics tracks:
 All retention values are computed at query time using the adaptive forgetting
 engine (R = e^(-t/S_adaptive)). The analytics engine only aggregates and
 analyses — it never estimates retention itself.
+
+All endpoints require authentication. Learners can only access their own
+data unless the caller is a privileged role (admin / API_CLIENT).
 """
 
 import uuid
@@ -29,6 +32,8 @@ from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 
 from app.deps import get_db
+from app.deps_auth import enforce_learner_access, get_current_user
+from app.models.user import User
 from app.schemas.analytics import (
     AdvancedAnalyticsReportResponse,
     AnalyticsReportResponse,
@@ -52,6 +57,7 @@ def retention_summary(
     subject_id: uuid.UUID | None = Query(None, description="Filter by subject"),
     module_id: uuid.UUID | None = Query(None, description="Filter by module"),
     chapter_id: uuid.UUID | None = Query(None, description="Filter by chapter"),
+    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     """
@@ -65,6 +71,7 @@ def retention_summary(
 
     Optionally scope by subject, module, or chapter.
     """
+    enforce_learner_access(user_id, current_user)
     return analytics_service.get_retention_summary(
         db, user_id,
         subject_id=subject_id,
@@ -83,6 +90,7 @@ def weak_topics(
     subject_id: uuid.UUID | None = Query(None, description="Filter by subject"),
     weak_threshold: float = Query(0.50, ge=0.0, le=1.0, description="Retention threshold"),
     limit: int | None = Query(None, ge=1, le=100, description="Max topics to return"),
+    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     """
@@ -93,6 +101,7 @@ def weak_topics(
     - **reason** — human-readable explanation of why the topic is weak
     - **hierarchy context** — chapter, module, subject names
     """
+    enforce_learner_access(user_id, current_user)
     return analytics_service.get_weak_topics(
         db, user_id,
         subject_id=subject_id,
@@ -110,6 +119,7 @@ def retention_heatmap(
     user_id: uuid.UUID,
     subject_id: uuid.UUID | None = Query(None, description="Filter by subject"),
     group_by: str = Query("chapter", description="Group by: chapter or module"),
+    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     """
@@ -120,6 +130,7 @@ def retention_heatmap(
 
     Rows are sorted worst-first for immediate visual scanning.
     """
+    enforce_learner_access(user_id, current_user)
     return analytics_service.get_heatmap(
         db, user_id,
         subject_id=subject_id,
@@ -135,6 +146,7 @@ def retention_heatmap(
 def retention_distribution(
     user_id: uuid.UUID,
     subject_id: uuid.UUID | None = Query(None, description="Filter by subject"),
+    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     """
@@ -143,6 +155,7 @@ def retention_distribution(
     Returns fixed-width buckets from 0.0 to 1.0 with count, percentage,
     and zone classification per bucket. Ready for bar chart rendering.
     """
+    enforce_learner_access(user_id, current_user)
     return analytics_service.get_distribution(
         db, user_id,
         subject_id=subject_id,
@@ -157,6 +170,7 @@ def retention_distribution(
 def full_report(
     user_id: uuid.UUID,
     subject_id: uuid.UUID | None = Query(None, description="Filter by subject"),
+    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     """
@@ -171,6 +185,7 @@ def full_report(
     All retention values are computed at query time using the adaptive
     forgetting curve R = e^(-t/S_adaptive).
     """
+    enforce_learner_access(user_id, current_user)
     return analytics_service.get_full_report(
         db, user_id,
         subject_id=subject_id,
@@ -185,6 +200,7 @@ def full_report(
 def advanced_report(
     user_id: uuid.UUID,
     subject_id: uuid.UUID | None = Query(None, description="Filter by subject"),
+    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     """
@@ -204,6 +220,7 @@ def advanced_report(
     All retention values are computed at query time using the adaptive
     forgetting curve R = e^(-t/S_adaptive).
     """
+    enforce_learner_access(user_id, current_user)
     return analytics_service.get_advanced_report(
         db, user_id,
         subject_id=subject_id,

@@ -65,7 +65,7 @@ def _build_current_state(state) -> CurrentState:
         revision_count=state.revision_count,
         forgetting_probability=state.forgetting_probability,
         urgency_score=state.urgency_score,
-        # Adaptive forgetting curve (Phase 8.5)
+        # Adaptive forgetting curve
         base_stability=state.base_stability,
         revision_quality=state.revision_quality,
         difficulty_factor=state.difficulty_factor,
@@ -131,7 +131,7 @@ def _apply_to_orm(state, out: RecalibrationOutput) -> None:
     state.revision_count = out.new_revision_count
     state.forgetting_probability = out.new_forgetting_probability
     state.urgency_score = out.new_urgency
-    # Adaptive forgetting curve (Phase 8.5)
+    # Adaptive forgetting curve
     state.base_stability = out.new_base_stability
     state.revision_quality = out.new_revision_quality
     state.difficulty_factor = out.new_difficulty_factor

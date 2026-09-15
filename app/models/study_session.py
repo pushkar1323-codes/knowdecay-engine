@@ -46,7 +46,7 @@ class StudySession(Base):
         Integer, nullable=False, default=0
     )  # total study time in minutes
 
-    # ── Enhanced session tracking (Phase 16 — all nullable) ───────────────────
+    # ── Enhanced session tracking (all nullable) ────────────────────────────────
     started_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True), nullable=True
     )  # explicit start time

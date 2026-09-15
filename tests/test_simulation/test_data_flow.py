@@ -1,7 +1,7 @@
 """
 tests/test_simulation/test_data_flow.py
 ────────────────────────────────────────
-Phase 11: End-to-end data flow validation through the intelligence backbone.
+End-to-end data flow validation through the intelligence backbone.
 
 Validates the complete pipeline:
   MemoryState → Adaptive Stability → Decay Engine → Retention Estimate

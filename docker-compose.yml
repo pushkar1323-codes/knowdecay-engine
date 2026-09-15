@@ -24,11 +24,11 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-knowdecay}
       POSTGRES_DB: ${POSTGRES_DB:-knowdecay}
     ports:
-      - "${DB_PORT:-5432}:5432"
+      - "${DB_PORT:-5433}:5432"
     volumes:
       - knowdecay_pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-knowdecay} -d ${POSTGRES_DB:-knowdecay}"]
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-knowdecay} -d ${POSTGRES_DB:-knowdecay}" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -58,7 +58,7 @@ services:
     volumes:
       - .:/app
       - /app/__pycache__
-    entrypoint: ["/bin/bash", "scripts/entrypoint.sh"]
+    entrypoint: [ "/bin/bash", "scripts/entrypoint.sh" ]
     command:
       - uvicorn
       - app.main:app
@@ -68,7 +68,7 @@ services:
       - "8000"
       - --reload
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health/live"]
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/health/live" ]
       interval: 30s
       timeout: 5s
       start_period: 20s
@@ -97,14 +97,14 @@ services:
       DATABASE_URL: postgresql://${POSTGRES_USER:-knowdecay}:${POSTGRES_PASSWORD:-knowdecay}@db:5432/${POSTGRES_DB:-knowdecay}
       APP_ENV: production
       AUTO_MIGRATE: "false"
-    entrypoint: ["/bin/bash", "scripts/entrypoint.sh"]
+    entrypoint: [ "/bin/bash", "scripts/entrypoint.sh" ]
     command:
       - gunicorn
       - app.main:app
       - -c
       - gunicorn.conf.py
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health/live"]
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/health/live" ]
       interval: 30s
       timeout: 5s
       start_period: 15s
@@ -133,7 +133,7 @@ services:
       - .env
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER:-knowdecay}:${POSTGRES_PASSWORD:-knowdecay}@db:5432/${POSTGRES_DB:-knowdecay}
-    entrypoint: ["/bin/bash", "scripts/entrypoint.sh"]
+    entrypoint: [ "/bin/bash", "scripts/entrypoint.sh" ]
     command:
       - alembic
       - upgrade
@@ -155,11 +155,11 @@ services:
       POSTGRES_PASSWORD: knowdecay_test
       POSTGRES_DB: knowdecay_test
     ports:
-      - "5433:5432"
+      - "5434:5432"
     tmpfs:
       - /var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U knowdecay_test -d knowdecay_test"]
+      test: [ "CMD-SHELL", "pg_isready -U knowdecay_test -d knowdecay_test" ]
       interval: 5s
       timeout: 3s
       retries: 5

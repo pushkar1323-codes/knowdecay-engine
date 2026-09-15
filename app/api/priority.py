@@ -6,12 +6,17 @@ REST endpoints for priority ranking.
 Endpoint summary:
   POST /v1/priority/rank        — single topic priority computation
   POST /v1/priority/rank/batch  — multi-topic batch ranking (sorted)
+
+All endpoints require authentication. Learners can only access their own
+data unless the caller is a privileged role (admin / API_CLIENT).
 """
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.deps import get_db
+from app.deps_auth import enforce_learner_access, get_current_user
+from app.models.user import User
 from app.schemas.priority import (
     PriorityBatchRequest,
     PriorityBatchResponse,
@@ -30,6 +35,7 @@ router = APIRouter(prefix="/priority", tags=["Priority Engine"])
 )
 def rank_topic(
     payload: PriorityRankRequest,
+    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     """
@@ -45,6 +51,7 @@ def rank_topic(
     Optionally pass `days_until_exam` and `importance_weight` to override
     values from the topic metadata.
     """
+    enforce_learner_access(payload.user_id, current_user)
     return priority_service.rank_single(
         db,
         payload.user_id,
@@ -61,6 +68,7 @@ def rank_topic(
 )
 def rank_topics_batch(
     payload: PriorityBatchRequest,
+    current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     """
@@ -71,6 +79,7 @@ def rank_topics_batch(
 
     Use `limit` to return only the top-N most urgent topics.
     """
+    enforce_learner_access(payload.user_id, current_user)
     return priority_service.rank_batch(
         db,
         payload.user_id,

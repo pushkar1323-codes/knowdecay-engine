@@ -1,7 +1,7 @@
 """
 simulation/qa_report.py
 ────────────────────────
-Phase 11: Quality Assurance report generator.
+Quality Assurance report generator.
 
 Runs all validation suites and produces a machine-readable JSON report:
   1. Engine invariant validators (7 checks)
@@ -163,7 +163,7 @@ def _build_qa_checklist() -> list[dict]:
 
 
 def generate_qa_report() -> dict:
-    """Generate the complete Phase 11 QA report."""
+    """Generate the complete QA report."""
     start = time.time()
 
     # Run simulation
@@ -171,7 +171,7 @@ def generate_qa_report() -> dict:
 
     # Build report sections
     report = {
-        "phase": "Phase 11 — Simulation, Validation & Quality Assurance",
+        "phase": "Simulation, Validation & Quality Assurance",
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "configuration": {
             "learners": QA_LEARNERS,
@@ -214,7 +214,7 @@ def main() -> int:
             output_path = sys.argv[idx + 1]
 
     print("=" * 60)
-    print("  KnowDecay Engine -- Phase 11 QA Report")
+    print("  KnowDecay Engine -- QA Report")
     print("=" * 60)
     print()
 

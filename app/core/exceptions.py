@@ -6,7 +6,7 @@ Centralised exception hierarchy and FastAPI exception handlers.
 All engine and service errors must raise a subclass of KnowDecayError.
 `register_exception_handlers(app)` is called once in main.py.
 
-Phase 12 enhancements:
+Features:
   - Request ID included in all error responses
   - Pydantic RequestValidationError handler with field-level detail
   - ServiceError and ConfigurationError exception types
